@@ -13,3 +13,4 @@
 //= require ./simplemde.min
 //= require ./tag-it.min
 //= require ./posts
+//= require ./comments
