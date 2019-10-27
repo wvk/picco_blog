@@ -3,6 +3,8 @@ en:
     comments:
       create:
         created: Your comment was successfully created.
+      destroy:
+        destroyed: The comment was successfully destroyed.
 
     posts:
       create:

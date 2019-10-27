@@ -6,9 +6,14 @@ module PiccoBlog
       @post = Post.friendly.find(params[:post_id])
       @comment = @post.comments.create(comment_params)
 
-      flash[:notice] = t('.created')
+      redirect_to back_or_default(posts_path), notice: t('.created')
+    end
 
-      redirect_to back_or_default(posts_path)
+    def destroy
+      @post = Post.friendly.find(params[:post_id])
+      @post.comments.destroy(params[:id])
+
+      redirect_to back_or_default(posts_path), notice: t('.destroyed')
     end
 
     private

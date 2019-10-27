@@ -3,6 +3,8 @@ de:
     comments:
       create:
         created: Ihr Kommentar wurde gespeichert.
+      destroy:
+        destroyed: Der Kommentar wurde gelöscht.
 
     posts:
       create:
