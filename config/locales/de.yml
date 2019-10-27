@@ -1,0 +1,13 @@
+de:
+  picco_blog:
+    comments:
+      create:
+        created: Ihr Kommentar wurde gespeichert.
+
+    posts:
+      create:
+        created: Der Blogeintrag wurde erstellt.
+      update:
+        updated: Der Blogeintrag wurde aktualisiert.
+      destroy:
+        destroyed: Der Blogeintrag wurde gelöscht.

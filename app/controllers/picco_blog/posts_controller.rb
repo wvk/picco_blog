@@ -9,12 +9,13 @@ module PiccoBlog
 
     # GET /posts
     def index
+      posts_scope = Post.visible.order('id desc')
       if params[:tag].present?
-        @posts = Post.visible.tagged_with(params[:tag]).order('id desc')
+        @posts = posts_scope.tagged_with(params[:tag])
       elsif params[:search].present?
-        @posts = Post.visible.search(params[:search]).order("id desc")
+        @posts = posts_scope.search(params[:search])
       else
-        @posts = Post.visible.order('id desc')
+        @posts = posts_scope
       end
 
       @posts = @posts.page params[:page]
@@ -31,7 +32,7 @@ module PiccoBlog
       if request.path != post_path(@post)
         redirect_to @post, status: :moved_permanently
       end
-      
+
       @title = @post.title
       @meta_description = @post.excerpt.truncate(300).strip
     end
@@ -50,7 +51,7 @@ module PiccoBlog
       @post = Post.new(post_params)
 
       if @post.save
-        redirect_to @post, notice: 'Post was successfully created.'
+        redirect_to @post, notice: t('.created')
       else
         render :new
       end
@@ -59,7 +60,7 @@ module PiccoBlog
     # PATCH/PUT /posts/1
     def update
       if @post.update(post_params)
-        redirect_to @post, notice: 'Post was successfully updated.'
+        redirect_to @post, notice: t('.updated')
       else
         render :edit
       end
@@ -68,30 +69,29 @@ module PiccoBlog
     # DELETE /posts/1
     def destroy
       @post.destroy
-      redirect_to posts_url, notice: 'Post was successfully destroyed.'
+      redirect_to posts_url, notice: t('.destroyed')
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_post
-        @post = Post.friendly.find(params[:id])
-      end
 
-      def set_recent_posts
-        @recent_posts = Post.visible.last(PiccoBlog.recent_posts).reverse;
-      end
+    def set_post
+      @post = Post.friendly.find(params[:id])
+    end
 
-      def set_tags_all
-        @available_tags = ActsAsTaggableOn::Tagging.includes(:tag).where(context: 'tags').collect { |tagging| "#{tagging.tag.name}" }.uniq
-      end
+    def set_recent_posts
+      @recent_posts = Post.visible.last(PiccoBlog.recent_posts).reverse
+    end
 
-      def authenticate
-        redirect_to root_url unless eval(PiccoBlog.current_user).send(PiccoBlog.authenticate)
-      end
+    def set_tags_all
+      @available_tags = ActsAsTaggableOn::Tagging.includes(:tag).where(context: 'tags').collect { |tagging| tagging.tag.name.to_s }.uniq
+    end
 
-      # Only allow a trusted parameter "white list" through.
-      def post_params
-        params.require(:post).permit(:title, :text, :author_id, :tag_list, :excerpt, :state, :members_only, :featured_image)
-      end
+    def authenticate
+      redirect_to root_url unless eval(PiccoBlog.current_user).send(PiccoBlog.authenticate)
+    end
+
+    def post_params
+      params.require(:post).permit(:title, :text, :author_id, :tag_list, :excerpt, :state, :members_only, :featured_image)
+    end
   end
 end

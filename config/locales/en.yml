@@ -1,0 +1,13 @@
+en:
+  picco_blog:
+    comments:
+      create:
+        created: Your comment was successfully created.
+
+    posts:
+      create:
+        created: Post was successfully created.
+      update:
+        updated: Post was successfully updated.
+      destroy:
+        destroyed: Post was successfully destroyed.
