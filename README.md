@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/picco_blog.svg)](https://badge.fury.io/rb/picco_blog)
 
-PiccoBlog is a simple and light weight markdown blog engine for Ruby on Rails (v4.2.4+) applications. 
+PiccoBlog is a simple and light weight markdown blog engine for Ruby on Rails (v4.2.4+) applications.
 
 #### Basic functionality includes:
 
@@ -12,15 +12,15 @@ PiccoBlog is a simple and light weight markdown blog engine for Ruby on Rails (v
 - Pagination
 - Member's only flag
 - Hidden/Visible state
+- Simple comments
 
 #### TODO:
 - Enable autosave feature
 - Integrate complete test suite
-- Comments are not fully impemented (ActiveRecord or other)
 
 #### Dependencies:
-- [SimpleMDE v1.11.2 Markdown Editor Library](https://simplemde.com)
-- JQuery
+- [SimpleMDE v1.11.2 Markdown Editor Library](https://simplemde.com) (included)
+- JQuery (not included)
 
 ## Installation
 
@@ -71,7 +71,7 @@ Done!
 ## Configuation
 
 #### Initializer
-The default initializer was copied to `config/initializers/picco_blog.rb`. Each configurable option is commented in the file. 
+The default initializer was copied to `config/initializers/picco_blog.rb`. Each configurable option is commented in the file.
 
 #### Dependency gems
 By default, Dragonfly and Friendly ID gems are utilized. To override these configurations, create `config/initializers/dragonfly.rb` and `config/initializers/friendly_id.rb` initializers.
