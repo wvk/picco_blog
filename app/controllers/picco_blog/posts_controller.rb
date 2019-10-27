@@ -10,15 +10,16 @@ module PiccoBlog
     # GET /posts
     def index
       posts_scope = Post.visible.order('id desc')
+
       if params[:tag].present?
-        @posts = posts_scope.tagged_with(params[:tag])
-      elsif params[:search].present?
-        @posts = posts_scope.search(params[:search])
-      else
-        @posts = posts_scope
+        posts_scope = posts_scope.tagged_with(params[:tag])
       end
 
-      @posts = @posts.page params[:page]
+      if params[:search].present?
+        posts_scope = posts_scope.search(params[:search])
+      end
+
+      @posts = posts_scope.page params[:page]
       @title = "Blog"
     end
 
@@ -59,7 +60,7 @@ module PiccoBlog
 
     # PATCH/PUT /posts/1
     def update
-      if @post.update(post_params)
+      if @post.update post_params
         redirect_to @post, notice: t('.updated')
       else
         render :edit
@@ -91,7 +92,7 @@ module PiccoBlog
     end
 
     def post_params
-      params.require(:post).permit(:title, :text, :author_id, :tag_list, :excerpt, :state, :members_only, :featured_image)
+      params.require(:post).permit(:title, :text, :author_id, :tag_list, :excerpt, :state, :members_only, :featured_image, :images)
     end
   end
 end
