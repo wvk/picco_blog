@@ -2,8 +2,6 @@ module PiccoBlog
   class ApplicationController < ::ActionController::Base
     layout PiccoBlog.layout
 
-    before_action :authenticate_user!
-
     protected
 
     helper_method :current_url, :back_or_default

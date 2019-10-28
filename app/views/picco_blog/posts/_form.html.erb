@@ -17,7 +17,23 @@
     <%= f.text_field :title, :placeholder => "Title" %> <br/>
   </div>
   <div class="field">
-    <%= f.text_area :text, :class => "picco_blog_editor" %> <br/>
+    <%= f.text_area :text, :class => "picco_blog_editor", id: :blog_post_text %> <br/>
+    <div class="image-picker picco_blog_image_picker" data-for="blog_post_text">
+      <div class="config">
+        size:
+        <label>
+          <%= radio_button_tag 'size', :full, true %>
+          Original
+        </label>
+        <label>
+          <%= radio_button_tag 'size', :preview %>
+          Preview
+        </label>
+      </div>
+      <div class="image-list">
+        <%= render PiccoBlog::Image.all %>
+      </div>
+    </div>
   </div>
   <div class="field">
     <%= f.text_area :excerpt, :class => "picco_blog_editor" %> <br/>

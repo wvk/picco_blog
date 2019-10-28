@@ -1,0 +1,6 @@
+<% if image.image_stored? %>
+  <div class="image">
+    <p class="slug"><%= image.slug %></p>
+    <%= link_to image_tag(image.image.thumb('90x90#').url), image.image.url, data: {description: image.description, preview_url: image.image.thumb('250x250').url} %>
+  </div>
+<% end %>
