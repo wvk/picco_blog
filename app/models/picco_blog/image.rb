@@ -13,6 +13,8 @@ module PiccoBlog
         message: "should be either .jpeg, .jpg, .png",
         if: :image_changed?
 
+    default_scope -> { order(created_at: :desc) }
+
     def name
       self.image_name
     end

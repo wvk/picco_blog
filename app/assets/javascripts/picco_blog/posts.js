@@ -4,7 +4,6 @@
 
 $(document).ready(function() {
   function toggleImageSelector(editor) {
-    console.log(editor);
     editor.gui.imagePicker.classList.toggle('hidden');
     return false;
   }

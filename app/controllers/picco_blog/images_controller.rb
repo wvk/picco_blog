@@ -6,9 +6,7 @@ module PiccoBlog
     before_action :authenticate, except: [:show]
 
     def index
-      images_scope = Image.order('id desc')
-
-      @images = images_scope.page params[:page]
+      @images = Image.page params[:page]
     end
 
     # GET /images/1
@@ -27,6 +25,7 @@ module PiccoBlog
     # POST /images
     def create
       @image = Image.new(image_params)
+      @image.author_id ||= current_user.id
 
       if @image.save
         redirect_to back_or_default(images_path), notice: t('.created')

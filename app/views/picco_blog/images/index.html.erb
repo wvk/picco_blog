@@ -1,5 +1,7 @@
 <h1>All images</h1>
 
-<%= render @images %>
+<div class="image-list">
+  <%= render @images %>
+</div>
 
 <%= render 'form', image: PiccoBlog::Image.new %>
