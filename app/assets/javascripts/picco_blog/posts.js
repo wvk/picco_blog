@@ -2,39 +2,39 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
-$(document).ready(function() {
+(function() {
   function toggleImageSelector(editor) {
     editor.gui.imagePicker.classList.toggle('hidden');
     return false;
   }
 
-  $('textarea.picco_blog_editor').each(function() {
+  document.querySelectorAll('textarea.picco_blog_editor').forEach(function(textareaElement) {
     var simplemde = new SimpleMDE({
-        element: this,
-        toolbar: [
-          "bold", "italic", "heading", "strikethrough", "|",
-          "quote", "unordered-list", "ordered-list", "|",
-          "link", {name: 'select-image', className: 'fa fa-picture-o', title: 'Bild Auswählen', action: toggleImageSelector}, "table", "horizontal-rule", "|",
-          "preview", "|", "guide"
-        ],
-        insertTexts: {
-          horizontalRule: ["", "\n\n-----\n\n"],
-          image: ["![](http://", ")"],
-          link: ["[", "](http://)"],
-          table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
-        },
-        status: false
+      element: textareaElement,
+      toolbar: [
+        "bold", "italic", "heading", "strikethrough", "|",
+        "quote", "unordered-list", "ordered-list", "|",
+        "link", {name: 'select-image', className: 'fa fa-picture-o', title: 'Select Image', action: toggleImageSelector}, "table", "horizontal-rule", "|",
+        "preview", "|", "guide"
+      ],
+      insertTexts: {
+        horizontalRule: ["", "\n\n-----\n\n"],
+        image: ["![](http://", ")"],
+        link: ["[", "](http://)"],
+        table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
+      },
+      status: false
     });
     simplemde.render();
 
-    $('.picco_blog_image_picker[data-for=' + this.id + ']').each(function(){
-      simplemde.gui.imagePicker = this;
-      this.classList.add('hidden');
+    document.querySelectorAll('.picco_blog_image_picker[data-for=' + textareaElement.id + ']').forEach(function(imageListElement){
+      simplemde.gui.imagePicker = imageListElement;
+      imageListElement.classList.add('hidden');
       var editor = simplemde.codemirror
       var cmWrapper = editor.getWrapperElement();
-      cmWrapper.parentNode.insertBefore(this, cmWrapper);
+      cmWrapper.parentNode.insertBefore(imageListElement, cmWrapper);
 
-      $(this).on('click', function(ev) {
+      imageListElement.addEventListener('click', function(ev) {
         var img = ev.target.closest('.image');
         if (img) {
           var size = img.closest('.image-picker').querySelector('.config input[name=size]:checked').value;
@@ -50,10 +50,4 @@ $(document).ready(function() {
       })
     });
   });
-
-  if($("#post_tag_list").length) {
-    $("#post_tag_list").tagit({
-        availableTags: available_tags
-    });
-  }
-});
+})();

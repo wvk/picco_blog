@@ -1,9 +1,9 @@
 // Select each textarea with the class picco_comment_editor and add SimpleMDE editor
 
-$(document).ready(function() {
-  $('textarea.picco_comment_editor').each(function() {
+(function() {
+  document.querySelectorAll('textarea.picco_comment_editor').forEach(function(textareaElement) {
       var simplemde = new SimpleMDE({
-          element: this,
+          element: textareaElement,
           toolbar: [
             "bold", "italic", "strikethrough", "|",
             "quote", "unordered-list", "ordered-list", "|",
@@ -19,4 +19,4 @@ $(document).ready(function() {
       });
       simplemde.render();
   });
-});
+})();
