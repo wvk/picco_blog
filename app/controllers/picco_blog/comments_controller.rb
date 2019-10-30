@@ -10,8 +10,12 @@ module PiccoBlog
     end
 
     def destroy
-      @post = Post.friendly.find(params[:post_id])
-      @post.comments.destroy(params[:id])
+      if params[:post_id]
+        scope = Post.friendly.find(params[:post_id])&.comments
+      else
+        scope = Comment
+      end
+      scope.destroy(params[:id])
 
       redirect_to back_or_default(posts_path), notice: t('.destroyed')
     end

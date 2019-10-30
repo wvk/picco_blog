@@ -6,7 +6,7 @@ PiccoBlog::Engine.routes.draw do
     resources :comments
   end
 
-  resources :comments, only: [:index, :edit, :update]
+  resources :comments, only: [:index, :edit, :update, :destroy]
 
   resources :images
 
