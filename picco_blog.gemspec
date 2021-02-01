@@ -7,9 +7,9 @@ require "picco_blog/version"
 Gem::Specification.new do |s|
   s.name        = "picco_blog"
   s.version     = PiccoBlog::VERSION
-  s.authors     = ["Brandon Bango"]
-  s.email       = ["brandon@acentrosys.com"]
-  s.homepage    = "https://github.com/acentro/picco_blog"
+  s.authors     = ["Brandon Bango", "Willem van Kerkhof"]
+  s.email       = ["brandon@acentrosys.com", "wvk@consolving.de"]
+  s.homepage    = "https://github.com/wvk/picco_blog"
   s.summary     = "PiccoBlog is a simple Ruby on Rails markdown blog engine."
   s.license     = "MIT"
 
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'redcarpet'
   s.add_dependency 'dragonfly', '>= 1.1.1'
   s.add_dependency 'mime-types'
+  s.add_dependency 'awesome_nested_set', '~> 3.1'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'minitest'

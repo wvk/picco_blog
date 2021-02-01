@@ -37,11 +37,11 @@ module PiccoBlog
     private
 
     def comment_update_params
-      params.require(:comment).permit(:text, :approved)
+      params.require(:comment).permit(:text, :approved, :email, :parent_id)
     end
 
     def comment_create_params
-      params.require(:comment).permit(:text)
+      params.require(:comment).permit(:text, :email, :parent_id)
     end
   end
 end
