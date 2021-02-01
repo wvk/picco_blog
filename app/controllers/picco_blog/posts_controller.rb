@@ -9,7 +9,12 @@ module PiccoBlog
 
     # GET /posts
     def index
-      posts_scope = Post.visible.order('id desc')
+      if current_user
+        posts_scope = Post.visible
+      else
+        posts_scope = Post
+      end
+      posts_scope = posts_scope.order('id desc')
 
       if params[:tag].present?
         posts_scope = posts_scope.tagged_with(params[:tag])
@@ -21,11 +26,6 @@ module PiccoBlog
 
       @posts = posts_scope.page params[:page]
       @title = "Blog"
-    end
-
-    def admin_list
-      @posts = Post.all.order('id desc')
-      @posts = @posts.page params[:page]
     end
 
     # GET /posts/1

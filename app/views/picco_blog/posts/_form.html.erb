@@ -16,9 +16,10 @@
   <div class="field">
     <%= f.text_field :title, :placeholder => "Title" %> <br/>
   </div>
+
   <div class="field">
-    <%= f.text_area :text, :class => "picco_blog_editor", id: :blog_post_text %> <br/>
-    <div class="image-picker picco_blog_image_picker" data-for="blog_post_text">
+    <%= f.text_area :text, :class => "picco_blog_editor", id: "blog-post-text-#{@post.id}" %> <br/>
+    <div class="image-picker picco_blog_image_picker" data-for="<%= "blog-post-text-#{@post.id}" %>">
       <div class="config">
         size:
         <label>
@@ -35,9 +36,11 @@
       </div>
     </div>
   </div>
+
   <div class="field">
-    <%= f.text_area :excerpt, :class => "picco_blog_editor" %> <br/>
+    <%= f.text_area :excerpt, :class => "picco_blog_editor", id: "excerpt-#{@post.id}" %> <br/>
   </div>
+
   <div class="field">
     <%= f.select :state, PiccoBlog::Post.states.keys.to_a, { include_blank: "Select" } %>
   </div>

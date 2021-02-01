@@ -19,7 +19,7 @@ module PiccoBlog
       end
 
       preview += " " + link_to("Continue Reading", picco_blog.post_path(post)) if continue_link
-      preview.html_safe 
+      preview.html_safe
     end
 
     def nil_or_empty(str)
@@ -27,20 +27,24 @@ module PiccoBlog
     end
 
     def markdown(text)
-      renderer = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: false)
+      renderer = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: false, with_toc_data: true, )
 
       options = {
         autolink: true,
         no_intra_emphasis: true,
         disable_indented_code_blocks: true,
         fenced_code_blocks: true,
-        lax_html_blocks: true,
-        strikethrough: true,
-        superscript: true,
-        tables: true
+        lax_html_blocks: false,
+        footnotes: true,
+        strikethrough: false,
+        superscript: false,
+        tables: true,
+        space_after_headers: true,
+        underline: false,
+        quote: true
       }
 
-      Redcarpet::Markdown.new(renderer, options).render(text).html_safe
+      Redcarpet::Markdown.new(renderer, options).render(text).html_safe #.gsub(%r{<p>(<img src="[^"]" alt="[^""]">)</p>}, '\1')
     end
 
     def post_title_encode(post)
